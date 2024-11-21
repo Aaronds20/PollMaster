@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="Enter your description here"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<title>Voting App</title>
+</head>
+<body>
+    <br>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div th:if="${exist_email}">
+                    <div class="alert alert-danger" th:text="${exist_email}"></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="text-center">Register Form</h1>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/register}" method="post" th:object="${RegisterData}" class="form-horizontal needs-validation" novalidate>
+                            <div class="form-group">
+                                <label for="username">Enter Username</label>
+                                <input type="text" class="form-control" id="username" aria-describedby="usernameHelp"
+                                    placeholder="Enter Username" name="username" th:value="${RegisterData.username}"
+                                    th:classappend="${#fields.hasErrors('username')?'is-invalid':''}">
+                                <div th:each="error : ${#fields.errors('username')}" class="invalid-feedback">
+                                    <span th:text="${error}"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Enter Email</label>
+                                <input type="text" class="form-control" id="email" aria-describedby="emailHelp"
+                                    placeholder="Enter Email" name="email" th:value="${RegisterData.email}"
+                                    th:classappend="${#fields.hasErrors('email')?'is-invalid':''}">
+                                <div th:each="error : ${#fields.errors('email')}" class="invalid-feedback">
+                                    <span th:text="${error}"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="phoneno">Enter Phone Number</label>
+                                <input type="text" class="form-control" id="phoneno" aria-describedby="phonenoHelp"
+                                    placeholder="Enter phoneno" name="phoneno" th:value="${RegisterData.phoneno}"
+                                    th:classappend="${#fields.hasErrors('phoneno')?'is-invalid':''}">
+                                <div th:each="error : ${#fields.errors('phoneno')}" class="invalid-feedback">
+                                    <span th:text="${error}"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Enter Password</label>
+                                <input type="password" class="form-control" id="password" aria-describedby="passwordHelp"
+                                    placeholder="Enter Password" name="password" th:value="${RegisterData.password}"
+                                    th:classappend="${#fields.hasErrors('password')?'is-invalid':''}">
+                                <div th:each="error : ${#fields.errors('password')}" class="invalid-feedback">
+                                    <span th:text="${error}"></span>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 text-center">
+                                <button type="submit" class="btn btn-primary">Register</button>
+                            </div>
+                            <div class="text-center">
+                                <p>Already have an account? <a class="active text-primary" aria-current="page" th:href="@{/login}">Login</a></p>
+                            </div>                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <br>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+</body>
+</html>

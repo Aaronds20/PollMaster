@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Enter your description here" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Voting App</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div th:if="${param.error}">
+                    <div class="alert alert-danger">Invalid Username or Password</div>
+                </div>
+                <div th:if="${param.logout}">
+                    <div class="alert alert-warning">You have been logged out.</div>
+                </div>
+                <div th:if="${successMessage}">
+                    <div class="alert alert-success" th:text="${successMessage}"></div>
+                </div>
+                <div id="error-message" class="alert alert-danger" style="display: none;"></div>
+                <br>
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="text-center">Login Form</h2>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" role="form" th:action="@{/login}" class="form-horizontal"
+                            onsubmit="return validateForm()">
+                            <div class="form-group mb-3">
+                                <label class="control-label">Email</label>
+                                <input type="text" id="email" name="email" class="form-control"
+                                    placeholder="Enter email">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="control-label">Password</label>
+                                <input type="password" id="password" name="password" class="form-control"
+                                    placeholder="Enter password">
+                            </div>
+                            <div class="form-group mb-3 text-center">
+                                <button type="submit" class="btn btn-success">Login</button>
+                            </div>
+                            <div class="text-center">
+                                <p>Don't have an account? <a class="active text-primary" aria-current="page" th:href="@{/register}">Sign Up</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <script>
+                    function validateForm() {
+                        const email = document.getElementById("email").value;
+                        const password = document.getElementById("password").value;
+
+                        if (!email || !password) {
+                            const errorMessage = document.getElementById("error-message");
+                            errorMessage.textContent = "Email and password cannot be empty!";
+                            errorMessage.style.display = "block";
+                            return false;
+                        }
+
+                        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+                        if (!emailRegex.test(email)) {
+                            const errorMessage = document.getElementById("error-message");
+                            errorMessage.textContent = "Please enter a valid email";
+                            errorMessage.style.display = "block";
+                            return false;
+                        }
+                        return true;
+                    }
+                </script>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>

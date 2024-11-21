@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Enter your description here" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Voting App</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/user/votepage}">VotingApp</a>
+            <ul class="navbar-nav" sec:authorize="isAuthenticated()">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Menu
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#" th:href="@{/user/userdetails}">My Profile</a>
+                        <a class="dropdown-item" href="#" th:href="@{/logout}">Sign Out</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <br>
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div th:if="${exist_email}">
+                    <div class="alert alert-danger" th:text="${exist_email}"></div>
+                </div>
+                <div th:if="${InvalidPassword}">
+                    <div class="alert alert-danger" th:text="${InvalidPassword}"></div>
+                </div>
+                <!-- <div id="error-message" class="alert alert-danger" style="display: none;" onsubmit="return validateForm()"></div> -->
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="text-center">Edit User Details</h1>
+                    </div>
+                    <div class="card-body">
+                        <form autocomplete="off" th:action="@{'/user/updateuserdetails/' + ${user.id}}"
+                            th:object="${user}" method="post" class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label for="username">Enter Username</label>
+                                <input type="text" class="form-control" id="username" aria-describedby="usernameHelp"
+                                    placeholder="Enter Username" name="username" th:value="${user.username}"
+                                    th:classappend="${#fields.hasErrors('username')?'is-invalid':''}">
+                                <div th:each="error : ${#fields.errors('username')}" class="invalid-feedback">
+                                    <span th:text="${error}"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Enter Email</label>
+                                <input type="text" class="form-control" id="email" aria-describedby="emailHelp"
+                                    placeholder="Enter Email" name="email" th:value="${user.email}"
+                                    th:classappend="${#fields.hasErrors('email')?'is-invalid':''}">
+                                <div th:each="error : ${#fields.errors('email')}" class="invalid-feedback">
+                                    <span th:text="${error}"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="phoneno">Enter Phone Number</label>
+                                <input type="text" class="form-control" id="phoneno" aria-describedby="phonenoHelp"
+                                    placeholder="Enter phoneno" name="phoneno" th:value="${user.phoneno}"
+                                    th:classappend="${#fields.hasErrors('phoneno')?'is-invalid':''}">
+                                <div th:each="error : ${#fields.errors('phoneno')}" class="invalid-feedback">
+                                    <span th:text="${error}"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Enter Password</label>
+                                <input type="password" class="form-control" id="password"
+                                    aria-describedby="passwordHelp" placeholder="Enter Password" name="password"
+                                    th:classappend="${#fields.hasErrors('password')?'is-invalid':''}">
+                                <div th:each="error : ${#fields.errors('password')}" class="invalid-feedback">
+                                    <span th:text="${error}"></span>
+                                </div>
+                            </div>                            
+                            <div class="form-group">
+                                <label for="c_password">Confirm Password</label>
+                                <input type="password" class="form-control" id="c_password"
+                                aria-describedby="c_passwordHelp"
+                                placeholder="Confirm Password" name="c_password"
+                                th:classappend="${#fields.hasErrors('c_password')?'is-invalid':''}">
+                                <div th:each="error : ${#fields.errors('c_password')}" class="invalid-feedback">
+                                    <span th:text="${error}"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-primary btn-block" value="Update User" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+
+    <!-- <script>
+        function validateForm() {
+            const c_password = document.getElementById("c_password").value;
+
+            if (!c_password) {
+                const errorMessage = document.getElementById("error-message");
+                errorMessage.textContent = "Please fill the confirm password field";
+                errorMessage.style.display = "block";
+                return false;
+            }
+            return true;
+        }
+        </script> -->
+</body>
+
+</html>

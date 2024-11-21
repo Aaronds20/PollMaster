@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <title>Voting App</title>
+<head>
+</head>
+<body>
+    <div th:fragment="pagination">
+        <div th:with="baseUrl=${URLparameter}">
+            <span th:if="${pager.indexOutOfBounds()}">
+                Page is out of bounds. Go back to <a th:href="@{${baseUrl}(page=1)}">Home</a>.
+            </span>
+        
+            <span th:unless="${pager.indexOutOfBounds()}">
+                <nav>
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item" th:if="${pager.hasPrevious()}">
+                            <!-- <a class="page-link" th:href="@{${baseUrl}(page=1)}" aria-label="First">«</a> -->
+                            <a class="page-link" th:href="@{${baseUrl}(page=${pager.getPageIndex() - 1})}" aria-label="Previous">«</a>
+                        </li>
+        
+                        <li class="page-item disabled">
+                            <span class="page-link" th:if="${pager.getTotalPages() != 1}" th:text="'Page ' + ${pager.getPageIndex()} + ' of ' + ${pager.getTotalPages()}"></span>
+                        </li>
+        
+                        <li class="page-item" th:if="${pager.hasNext()}">
+                            <a class="page-link" th:href="@{${baseUrl}(page=${pager.getPageIndex() + 1})}" aria-label="Next">»</a>
+                            <!-- <a class="page-link" th:href="@{${baseUrl}(page=${pager.getTotalPages()})}" aria-label="Last">»</a> -->
+                        </li>
+                    </ul>
+                </nav>
+            </span>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bs-init.js"></script>
+    <script src="assets/js/clean-blog.js"></script>
+</body>
+</html>

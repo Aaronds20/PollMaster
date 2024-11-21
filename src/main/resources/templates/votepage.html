@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Enter your description here" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Voting App</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/user/votepage}">VotingApp</a>
+            <ul class="navbar-nav" sec:authorize="isAuthenticated()">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Menu
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#" th:href="@{/user/userdetails}">My Profile</a>
+                        <a class="dropdown-item" href="#" th:href="@{/logout}">Sign Out</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div th:if="${AlreadyVoted}">
+                    <div class="card-body text-center ">
+                        <div class="alert alert-danger text-center" th:text="${AlreadyVoted}"></div>
+                    </div>
+                </div>
+                <div th:if="${success}">
+                    <div class="card-body text-center">
+                        <div class="alert alert-success text-center" th:text="${success}"></div>
+                    </div>
+                </div>
+                <div th:if="${#strings.isEmpty(AlreadyVoted) && #strings.isEmpty(success)}">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="text-center">Vote Page</h2>
+                        </div>
+                        <div class="card-body">
+                            <form th:action="@{/user/updatevote}" method="post" class="form-horizontal" id="myForm">
+                                <div th:each="Candidate : ${pager.votes}" class="form-check text-center">
+                                    <input type="radio" id="candidate" class="form-check-input" name="candidate"
+                                        th:text="${Candidate.candidateName}" th:value="${Candidate.id}">
+                                    <br><br>
+                                </div>
+                                <div class="form-group mb-3 text-center">
+                                    <button type="submit" class="btn btn-warning" id="sub">Vote</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div th:replace="~{/fragments/pagination :: pagination(URLparameter='/user/votepage')}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("myForm");
+            const submitButton = document.getElementById("sub");
+
+            submitButton.addEventListener("click", function (event) {
+                const selectedCandidate = document.querySelector(".form-check-input:checked");
+
+                if (!selectedCandidate) {
+                    alert("Please select a candidate before submitting.");
+                    event.preventDefault(); // Prevent form submission
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

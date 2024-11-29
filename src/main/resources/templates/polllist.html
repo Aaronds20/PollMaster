@@ -27,9 +27,13 @@
             </ul>                
         </div>
     </nav>
-    <br>
+    <div th:if="${success}">
+      <div class="card-body text-center">
+          <div class="alert alert-success text-center" th:text="${success}"></div>
+      </div>
+  </div>
     <div class="text-center">
-        <h1 class="text-bg-dark">Voters Count Page</h1>
+        <h1 class="text-bg-dark">Poll Count Page</h1>
     <table class="table">
         <thead class="thead-dark">
           <tr>

@@ -15,16 +15,12 @@ public class VoteService {
     @Autowired
     private VoteRepository voteRepository;
 
-    public void UpdateVote(Vote vote){
-        vote.setCount(vote.getCount()+1);
-        voteRepository.saveAndFlush(vote);
-    }
-
-    public Page<Vote> findAllByCandidate(int page) {
+    
+    public Page<Vote> findAllByPollPage(int page) {
         return voteRepository.findAll(PageRequest.of(subtractPageByOne(page), 4));
     }
     
-    public Vote getCanditateById(int id){
+    public Vote getPollById(int id){
         Vote vote = voteRepository.findById(id);
         return vote;
     }

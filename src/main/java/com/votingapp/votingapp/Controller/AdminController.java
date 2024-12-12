@@ -1,8 +1,9 @@
 package com.votingapp.votingapp.Controller;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,16 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.votingapp.votingapp.Model.Poll;
 import com.votingapp.votingapp.Model.User;
-import com.votingapp.votingapp.Model.Vote;
 import com.votingapp.votingapp.Service.PollService;
-import com.votingapp.votingapp.Service.VoteService;
-import com.votingapp.votingapp.Util.Pager;
-
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @Controller
@@ -30,15 +27,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class AdminController {
 
     @Autowired
-    private VoteService VoteService;
     private PollService PollService;
     
     @GetMapping("/polllist")
     public String GetPollCount(@RequestParam(defaultValue = "0") int page,Model model,HttpSession httpSession){
         User loggedInUser = (User) httpSession.getAttribute("loggedInUser");
-        Page<Vote> canditates = VoteService.findAllByPollPage(page);
-        Pager pager = new Pager(canditates);
-        model.addAttribute("pager", pager);
+        List<Poll> pollsPage = PollService.findAllByPoll();
+        model.addAttribute("Polls", pollsPage);
         model.addAttribute("User", loggedInUser);
         return "polllist";
     }
@@ -53,6 +48,10 @@ public class AdminController {
 
     @PostMapping("/addpoll")
     public String AddnewPoll(@Valid @ModelAttribute("PollData") Poll poll,BindingResult result,Model model) {
+        if (poll.getOptions().size()<2) {
+            result.rejectValue("options", "error.poll", "Please provide at least two options.");
+            return "addnewpoll";
+        }
         if (!result.hasErrors()) {
             PollService.SavePoll(poll);
             model.addAttribute("success", "Poll has been added successfully");

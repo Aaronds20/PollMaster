@@ -16,7 +16,7 @@ public class Vote {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "vote_id")
-    private int id;
+    private long id;
 
     @OneToMany
     @JoinColumn(name = "user_id")

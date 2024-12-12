@@ -31,9 +31,6 @@
 
         </div>
     </nav>
-    <div th:if="${updateMessage}">
-        <div class="alert alert-success text-center " th:text="${updateMessage}"></div>
-    </div>
     <br>
     <div class="container-fluid py-5">
         <div class="row justify-content-center">
@@ -74,13 +71,6 @@
                             <div class="col-md-8">
                                 <p class="font-weight-bold text-primary">*********</p>
                             </div>
-                        </div>
-                        <div class="text-center mt-4">
-                            <a th:href="@{'/user/updateuserdetails/{id}'(id=${user.id})}">
-                                <button type="button" class="btn btn-outline-primary rounded-pill px-4 py-2">
-                                    Update User
-                                </button>
-                            </a>
                         </div>
                     </div>
                 </div>

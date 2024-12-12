@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.votingapp.votingapp.Model.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<User,Integer>{
+public interface UserRepository extends JpaRepository<User,Long>{
     
     @Query("select u from User u where u.email =:email")
 	public User loadUserByUserName(@Param("email") String email);

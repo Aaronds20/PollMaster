@@ -9,13 +9,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <script> 
-    function addOptionField() { 
-        const optionContainer = document.getElementById('optionsContainer'); 
-        const optionCount = optionContainer.children.length; const newOption = document.createElement('div'); 
-        newOption.innerHTML = `<label for="option${optionCount}">Option ${optionCount + 1}:</label> <input type="text" id="option${optionCount}" name="options[${optionCount}].text" required>`; 
-        optionContainer.appendChild(newOption); 
-    }
+    <script>
+        function addOptionField() {
+            const optionContainer = document.getElementById('optionsContainer');
+            const optionCount = optionContainer.children.length;
+            const newOption = document.createElement('div');
+            newOption.innerHTML = `<label for="option${optionCount}">Option ${optionCount + 1}:</label>
+                                   <input type="text" id="option${optionCount}" name="options[${optionCount}].text" required>`;
+            optionContainer.appendChild(newOption);
+        }
+
+        function validateForm() {
+            const optionContainer = document.getElementById('optionsContainer');
+            const optionCount = optionContainer.children.length;
+            if (optionCount < 2) {
+                alert("Please provide at least two options.");
+                return false;
+            }
+            return true;
+        }
     </script>
     <title>Voting App</title>
 </head>
@@ -30,7 +42,7 @@
                     </div>
                     <div class="card-body">
                         <form th:action="@{/addpoll}" method="post" th:object="${PollData}"
-                            class="form-horizontal needs-validation" novalidate>
+                            class="form-horizontal needs-validation" novalidate onsubmit="return validateForm()">
                             <div class="form-group">
                                 <label for="question">Enter your Question</label>
                                 <input type="text" class="form-control" id="question" aria-describedby="questionHelp"
@@ -43,15 +55,19 @@
                             <div class="form-group">
                                 <label for="option">Please add your options</label>
                                 <div id="optionsContainer">
-                                    <div> 
+                                    <div>
                                         <label for="option0">Option 1:</label>
                                         <input type="text" id="option0" name="options[0].text" required>
                                     </div>
+                                    <div>
+                                        <label for="option1">Option 2:</label>
+                                        <input type="text" id="option1" name="options[1].text" required>
+                                    </div>
                                 </div>
                                 <button type="button" onclick="addOptionField()">Add Option</button>
-                                <div>
-                                    <button type="submit">Add Poll</button>
-                                </div>
+                            </div>
+                            <div>
+                                <button type="submit">Add Poll</button>
                             </div>
                         </form>
                     </div>

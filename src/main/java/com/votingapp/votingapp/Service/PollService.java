@@ -1,5 +1,7 @@
 package com.votingapp.votingapp.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,5 +23,12 @@ public class PollService {
         } 
         pollRepository.save(poll);
     }
+
+    public List<Poll> findAllByPoll() {
+       return pollRepository.findAll();
+    }
     
+    // private int subtractPageByOne(int page){
+    //     return (page < 1) ? 0 : page - 1;
+    // }
 }

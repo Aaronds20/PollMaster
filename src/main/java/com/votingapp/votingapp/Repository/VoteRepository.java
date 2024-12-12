@@ -8,12 +8,7 @@ import com.votingapp.votingapp.Model.Vote;
 
 
 @Repository
-public interface VoteRepository extends JpaRepository<Vote, Integer> {
-    Vote findById(int id);
-
-    Vote findByCandidateName(String candidate);
-
-    // Page<Vote> findAllByCandidateName(String candidateName,Pageable pageable);
-
+public interface VoteRepository extends JpaRepository<Vote, Long> {
+   
 }
 

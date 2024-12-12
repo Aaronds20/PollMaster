@@ -21,7 +21,7 @@ public class Option {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "option_id")
-    private int id;
+    private long id;
 
     @Column(name = "option_text", nullable = false)
     @NotBlank(message = "*Please provide an option")

@@ -19,7 +19,7 @@ public class Poll {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "poll_id")
-    private int id;
+    private long id;
 
     @Column(name = "question", nullable = false)
     @NotBlank(message = "*Please provide a question")

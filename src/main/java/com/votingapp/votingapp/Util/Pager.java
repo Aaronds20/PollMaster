@@ -1,41 +1,42 @@
 package com.votingapp.votingapp.Util;
 
 import org.springframework.data.domain.Page;
-import com.votingapp.votingapp.Model.Vote;
+
+import com.votingapp.votingapp.Model.Poll;
 
 public class Pager {
-     private final Page<Vote> votes;
+     private final Page<Poll> polls;
 
-    public Pager(Page<Vote> votes) {
-        this.votes = votes;
+    public Pager(Page<Poll> polls) {
+        this.polls = polls;
     }
 
     public int getPageIndex() {
-        return votes.getNumber() + 1;
+        return polls.getNumber() + 1;
     }
 
     public int getPageSize() {
-        return votes.getSize();
+        return polls.getSize();
     }
 
     public boolean hasNext() {
-        return votes.hasNext();
+        return polls.hasNext();
     }
 
     public boolean hasPrevious() {
-        return votes.hasPrevious();
+        return polls.hasPrevious();
     }
 
     public int getTotalPages() {
-        return votes.getTotalPages();
+        return polls.getTotalPages();
     }
 
     public long getTotalElements() {
-        return votes.getTotalElements();
+        return polls.getTotalElements();
     }
 
-    public Page<Vote> getVotes() {
-        return votes;
+    public Page<Poll> getPoll() {
+        return polls;
     }
 
     public boolean indexOutOfBounds() {

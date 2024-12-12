@@ -1,8 +1,9 @@
 package com.votingapp.votingapp.Controller;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,12 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.votingapp.votingapp.Model.Poll;
 import com.votingapp.votingapp.Model.User;
-import com.votingapp.votingapp.Model.Vote;
-import com.votingapp.votingapp.Service.UserService;
+import com.votingapp.votingapp.Service.PollService;
 import com.votingapp.votingapp.Service.VoteService;
-import com.votingapp.votingapp.Util.Pager;
-
 import jakarta.servlet.http.HttpSession;
 
 
@@ -27,15 +26,14 @@ public class VoteController {
     @Autowired
     private VoteService voteService;
     @Autowired
-    private UserService userService;
+    private PollService pollService;
 
     @GetMapping("/votepage")
-    public String GetCanditateList(@RequestParam(defaultValue = "0") int page,Model model,HttpSession httpSession){
+    public String GetPollList(Model model,HttpSession httpSession){
         User loggedInUser = (User) httpSession.getAttribute("loggedInUser");
         if (loggedInUser.getVote()==null) {
-        Page<Vote> canditates = voteService.findAllByPollPage(page);
-        Pager pager = new Pager(canditates);
-        model.addAttribute("pager", pager);
+        List<Poll> pollsPage = pollService.findAllByPoll();
+        model.addAttribute("Polls", pollsPage);
         return "votepage";
         }
         model.addAttribute("AlreadyVoted", "You have already Voted");
@@ -43,12 +41,10 @@ public class VoteController {
     }
 
     @PostMapping("/updatevote")
-    public String UpdateVote(@RequestParam("candidate") int candidate_id,
-    @RequestParam(defaultValue = "0") int page,Model model,HttpSession httpSession){
+    public String UpdateVote(@RequestParam Long optionId,Model model,HttpSession httpSession){
         User loggedInUser = (User) httpSession.getAttribute("loggedInUser");
         if (loggedInUser.getVote()==null) {
-            Vote vote = voteService.getPollById(candidate_id);
-            userService.UpdateUser(loggedInUser,vote);
+            voteService.UpdateVote(optionId,loggedInUser);
             model.addAttribute("success", "Voted Succesfully");
             return "votepage";
         }else{

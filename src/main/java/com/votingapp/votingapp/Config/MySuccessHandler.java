@@ -33,7 +33,7 @@ public class MySuccessHandler implements AuthenticationSuccessHandler{
 				
 				if(user.getRole().equals("ROLE_USER")) {
                     session.setAttribute("loggedInUser", user);
-					redirectURL = "/user/votepage";
+					redirectURL = "/user/pollspage";
 				}
 				if(user.getRole().equals("ROLE_ADMIN")) {
                     session.setAttribute("loggedInUser", user);

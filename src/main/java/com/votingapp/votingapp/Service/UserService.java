@@ -7,7 +7,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.votingapp.votingapp.Model.User;
-import com.votingapp.votingapp.Model.Vote;
 import com.votingapp.votingapp.Repository.UserRepository;
 
 @Service
@@ -40,10 +39,6 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
-    public void UpdateUser(User loggedInUser, Vote vote) {
-       loggedInUser.setVote(vote);
-       userRepository.saveAndFlush(loggedInUser);
-    }
 
     public User GetUserById(int id){
         User user = userRepository.findById(id);

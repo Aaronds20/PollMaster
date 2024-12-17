@@ -26,6 +26,6 @@ public class Poll {
     private String question;
 
     @OneToMany(mappedBy = "poll", cascade = CascadeType.ALL)
-    private List<Option> options = new ArrayList<>();
+    private List<Options> options = new ArrayList<>();
 
 }

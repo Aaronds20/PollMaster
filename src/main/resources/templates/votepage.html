@@ -34,25 +34,20 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-8 offset-md-2">
-                <div th:if="${AlreadyVoted}">
+                <div th:if="${hasVoted}">
                     <div class="card-body text-center">
-                        <div class="alert alert-danger text-center" th:text="${AlreadyVoted}"></div>
+                        <div class="alert alert-danger text-center" th:text="${hasVoted}"></div>
                     </div>
                 </div>
-                <div th:if="${success}">
-                    <div class="card-body text-center">
-                        <div class="alert alert-success text-center" th:text="${success}"></div>
-                    </div>
-                </div>
-                <div th:if="${#strings.isEmpty(AlreadyVoted) && #strings.isEmpty(success)}">
+                <div th:if="${#strings.isEmpty(hasVoted)}">
                     <div class="card">
                         <div class="card-header">
                             <h2 class="text-center">Vote Page</h2>
                         </div>
                         <div class="card-body">
-                            <form th:action="@{/user/updatevote}" method="post" class="form-horizontal" id="myForm">
+                            <form th:action="@{/polls/{pollId}/vote(pollId=${poll.id})}" method="post" class="form-horizontal" id="myForm">
                                 <div class="form-group mb-3 text-center">
-                                    <p class="font-weight-bold text-primary" th:text="${Polls.question}"></p>
+                                    <p class="font-weight-bold text-primary" th:text="${poll.question}"></p>
                                 </div>
                                 <div class="form-group mb-3 text-center">
                                 <ul>
@@ -69,9 +64,9 @@
                                     </button>
                                 </div>
                             </form>
-                        </div>
+                        <!-- </div>
                         <div th:replace="~{/fragments/pagination :: pagination(URLparameter='/user/votepage')}"></div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

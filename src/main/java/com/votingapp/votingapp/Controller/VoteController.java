@@ -1,12 +1,13 @@
 package com.votingapp.votingapp.Controller;
 
-
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,49 +18,47 @@ import com.votingapp.votingapp.Service.PollService;
 import com.votingapp.votingapp.Service.VoteService;
 import jakarta.servlet.http.HttpSession;
 
-
-
 @Controller
 @RequestMapping("/user")
 public class VoteController {
-    
+
     @Autowired
     private VoteService voteService;
     @Autowired
     private PollService pollService;
 
-    @GetMapping("/votepage")
-    public String GetPollList(Model model,HttpSession httpSession){
-        User loggedInUser = (User) httpSession.getAttribute("loggedInUser");
-        if (loggedInUser.getVote()==null) {
+    @GetMapping("/pollspage")
+    public String GetPollList(Model model, HttpSession httpSession) {
+        // User loggedInUser = (User) httpSession.getAttribute("loggedInUser");
         List<Poll> pollsPage = pollService.findAllByPoll();
         model.addAttribute("Polls", pollsPage);
-        return "votepage";
-        }
-        model.addAttribute("AlreadyVoted", "You have already Voted");
+        return "pollspage";
+    }
+
+    @GetMapping("getpoll/{id}")
+    public String getPoll(@PathVariable Long id, Model model,HttpSession httpSession) {
+        Optional<Poll> poll = pollService.getPollById(id); 
+        model.addAttribute("poll", poll);
+        User loggedInUser = (User) httpSession.getAttribute("loggedInUser");
+        boolean hasVoted = pollService.hasUserVoted(id, loggedInUser.getId());
+        model.addAttribute("You have already voted", hasVoted);
         return "votepage";
     }
 
-    @PostMapping("/updatevote")
-    public String UpdateVote(@RequestParam Long optionId,Model model,HttpSession httpSession){
+    @PostMapping("/polls/{pollId}/vote")
+    public String UpdateVote(@PathVariable Long pollId, @RequestParam Long optionId, Model model,
+            HttpSession httpSession) {
         User loggedInUser = (User) httpSession.getAttribute("loggedInUser");
-        if (loggedInUser.getVote()==null) {
-            voteService.UpdateVote(optionId,loggedInUser);
-            model.addAttribute("success", "Voted Succesfully");
-            return "votepage";
-        }else{
-            model.addAttribute("AlreadyVoted", "You have already Voted");
-            return "votepage";
-        }
+        voteService.UpdateVote(optionId, loggedInUser);
+        model.addAttribute("success", "Voted Succesfully");
+        return "pollspage";
     }
 
     @GetMapping("/userdetails")
-        public String getUserDetails(Model model,HttpSession httpSession){
-            User loggedInUser = (User) httpSession.getAttribute("loggedInUser");
-            model.addAttribute("user", loggedInUser);
-            return "userdetails";    
-        }
+    public String getUserDetails(Model model, HttpSession httpSession) {
+        User loggedInUser = (User) httpSession.getAttribute("loggedInUser");
+        model.addAttribute("user", loggedInUser);
+        return "userdetails";
+    }
 
-   
 }
-

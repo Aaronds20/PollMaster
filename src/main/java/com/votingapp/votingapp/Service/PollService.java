@@ -1,6 +1,8 @@
 package com.votingapp.votingapp.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +33,8 @@ public class PollService {
         return pollRepository.findAll();
     }
 
-    public Optional<Poll> getPollById(long id) {
-        Optional<Poll> poll = pollRepository.findById(id);
-        return poll;
+    public Poll getPollById(Long pollId) {
+        return pollRepository.findById(pollId).orElseThrow(() -> new RuntimeException("Poll not found"));
     }
 
     public boolean hasUserVoted(Long pollId, Long userId) {
@@ -41,7 +42,27 @@ public class PollService {
         return vote.isPresent();
     }
 
+    public Map<String, Integer> getPollResults(Long pollId) {
+        Poll poll = getPollById(pollId);
+        Map<String, Integer> results = new HashMap<>();
+        for (Options option : poll.getOptions()) {
+            results.put(option.getText(), option.getVotes().size());
+        }
+        return results;
+    }
+
     // private int subtractPageByOne(int page){
     // return (page < 1) ? 0 : page - 1;
+    // }
+    // public Poll createPollWithOptions(String question,List<String> optionTexts) {
+    //     Poll poll = new Poll();
+    //     poll.setQuestion(question);
+    //     for (String text : optionTexts) {
+    //         Options option = new Options();
+    //         option.setText(text);
+    //         option.setPoll(poll);
+    //         poll.getOptions().add(option);
+    //     }
+    //     return pollRepository.save(poll);
     // }
 }

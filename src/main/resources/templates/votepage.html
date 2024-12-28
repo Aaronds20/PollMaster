@@ -1,98 +1,77 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="Description" content="Enter your description here" />
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
     <link rel="stylesheet" href="assets/css/style.css" />
     <title>Voting App</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" th:href="@{/user/votepage}">VotingApp</a>
-            <ul class="navbar-nav" sec:authorize="isAuthenticated()">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Menu
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#" th:href="@{/user/userdetails}">My Profile</a>
-                        <a class="dropdown-item" href="#" th:href="@{/logout}">Sign Out</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-8 offset-md-2">
-                <div th:if="${hasVoted}">
-                    <div class="card-body text-center">
-                        <div class="alert alert-danger text-center" th:text="${hasVoted}"></div>
-                    </div>
-                </div>
-                <div th:if="${#strings.isEmpty(hasVoted)}">
-                    <div class="card">
-                        <div class="card-header">
-                            <h2 class="text-center">Vote Page</h2>
-                        </div>
-                        <div class="card-body">
-                            <form th:action="@{/polls/{pollId}/vote(pollId=${poll.id})}" method="post" class="form-horizontal" id="myForm">
-                                <div class="form-group mb-3 text-center">
-                                    <p class="font-weight-bold text-primary" th:text="${poll.question}"></p>
-                                </div>
-                                <div class="form-group mb-3 text-center">
-                                <ul>
-                                    <li th:each="option : ${poll.options}">
-                                        <input type="radio" th:value="${option.id}" th:name="optionId"
-                                            th:id="${'option' + ${option.id}}" />
-                                        <label th:for="${'option' + ${option.id}}" th:text="${option.text}"></label>
-                                    </li>
-                                </ul>
-                                </div>
-                                <div class="form-group mb-3 text-center">
-                                    <button type="submit" class="btn btn-warning" id="sub">
-                                        Vote
-                                    </button>
-                                </div>
-                            </form>
-                        <!-- </div>
-                        <div th:replace="~{/fragments/pagination :: pagination(URLparameter='/user/votepage')}"></div>
-                    </div> -->
-                </div>
+      <div class="container">
+        <a class="navbar-brand" th:href="@{/user/pollspage}">VotingApp</a>
+        <ul class="navbar-nav" sec:authorize="isAuthenticated()">
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Menu
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#" th:href="@{/user/userdetails}">My Profile</a>
+              <a class="dropdown-item" href="#" th:href="@{/logout}">Sign Out</a>
             </div>
-        </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <div th:if="${message}">
+        <div class="alert alert-warning" th:text="${message}"></div>
+      </div>
+      <div th:if="${poll}">
+        <h1>Poll Question</h1>
+        <h2 th:text="${poll.question}"></h2>
+        <form id="myForm" th:action="@{/user/polls/{pollId}/vote(pollId=${poll.id})}" method="post">
+          <ul>
+            <li th:each="option : ${poll.options}">
+              <input
+                type="radio"
+                th:value="${option.id}"
+                th:name="optionId"
+                th:id="'option' + ${option.id}"
+                class="form-check-input"
+              />
+              <label th:for="'option' + ${option.id}" th:text="${option.text}"></label>
+            </li>
+          </ul>
+          <div th:if="${errorMessage}">
+            <div class="text-danger" th:text="${errorMessage}"></div>
+          </div>
+          <button type="submit" id="sub">Vote</button>
+        </form>
+      </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const form = document.getElementById("myForm");
-            const submitButton = document.getElementById("sub");
-
-            submitButton.addEventListener("click", function (event) {
-                const selectedCandidate = document.querySelector(
-                    ".form-check-input:checked"
-                );
-
-                if (!selectedCandidate) {
-                    alert("Please select a candidate before submitting.");
-                    event.preventDefault(); // Prevent form submission
-                }
-            });
-        });
-    </script>
-</body>
-
+  </body>
 </html>

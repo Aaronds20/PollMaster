@@ -12,7 +12,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Entity
@@ -24,13 +23,12 @@ public class Options {
     private long id;
 
     @Column(name = "option_text", nullable = false)
-    @NotBlank(message = "*Please provide an option")
     private String text;
 
     @ManyToOne
     @JoinColumn(name = "poll_id")
     private Poll poll;
 
-    @OneToMany(mappedBy = "option", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "option", cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Vote> votes = new ArrayList<>();
 }

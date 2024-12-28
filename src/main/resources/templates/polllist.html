@@ -11,46 +11,43 @@
 <title>Voting App</title>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" th:href="@{/admin/candidatelist}">VotingApp</a>
-            <ul class="navbar-nav" sec:authorize="isAuthenticated()" th:object="${User}">
+            <a class="navbar-brand" th:href="@{/admin/polllist}">VotingApp</a>
+            <ul class="navbar-nav" sec:authorize="isAuthenticated()">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                       Menu
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Menu
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <p class="dropdown-item" th:text="${User.username}"></p>
+                        <a class="dropdown-item" href="#" th:href="@{/admin/admindetails}">My Profile</a>
                         <a class="dropdown-item" href="#" th:href="@{/logout}">Sign Out</a>
                     </div>
                 </li>
-            </ul>                
+            </ul>
         </div>
     </nav>
-    <div th:if="${success}">
-      <div class="card-body text-center">
-          <div class="alert alert-success text-center" th:text="${success}"></div>
+    <div class="container-fluid">
+        <div th:if="${success}">
+            <div class="card-body text-center">
+                <div class="alert alert-success text-center" th:text="${success}"></div>
+            </div>
+        </div>
+      <div class="row" th:each="polls : ${Polls}">
+          <div class="col-md-8 offset-md-2 btn text-capitalize text-center text-light">
+              <a
+              class="font-weight-bold text-justify  text-lg-center text-primary"
+              href="#" th:href="@{'/admin/polls/' + ${polls.id} + '/results'}"
+              th:text="${polls.id}"></a>
+          </div>
       </div>
+      <div class="col-md-8 offset-md-2 btn btn-danger text-capitalize text-center text-light">
+        <a
+        class="font-weight-bold text-justify text-lg-center text-primary"
+        href="#" th:href="@{/admin/newpoll}">Add new Poll</a>
+    </div>
   </div>
-    <div class="text-center">
-        <h1 class="text-bg-dark">Poll Count Page</h1>
-    <table class="table">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Canditate</th>
-            <th scope="col">Vote Count</th>
-          </tr>
-        </thead>
-        <tbody th:each="Candidate : ${pager.votes}">
-                <tr>
-                    <th scope="row" th:text="${Candidate.id}">Id</th>
-                    <td th:text="${Candidate.candidateName}">Canditate Name</td>
-                    <td th:text="${Candidate.count}">Count</td>
-                  </tr>
-        </tbody>
-      </table>
-</div>
 <!-- <div th:replace="~{/fragments/pagination :: pagination(URLparameter='/admin/candidatelist')}"></div> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>

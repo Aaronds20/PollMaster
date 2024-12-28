@@ -25,7 +25,7 @@ public class Poll {
     @NotBlank(message = "*Please provide a question")
     private String question;
 
-    @OneToMany(mappedBy = "poll", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "poll", cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Options> options = new ArrayList<>();
 
 }

@@ -15,7 +15,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" th:href="@{/user/pollspage}">VotingApp</a>
+            <a class="navbar-brand" th:href="@{/admin/polllist}">VotingApp</a>
             <ul class="navbar-nav" sec:authorize="isAuthenticated()">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -23,7 +23,7 @@
                         Menu
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#" th:href="@{/user/userdetails}">My Profile</a>
+                        <a class="dropdown-item" href="#" th:href="@{/admin/admindetails}">My Profile</a>
                         <a class="dropdown-item" href="#" th:href="@{/logout}">Sign Out</a>
                     </div>
                 </li>
@@ -37,7 +37,7 @@
             <div class="col-md-8">
                 <div class="card shadow">
                     <div class="card-header bg-primary text-light">
-                        <h2 class="text-center">User Details Page</h2>
+                        <h2 class="text-center">Admin Details Page</h2>
                     </div>
                     <div class="card-body" th:object="${user}">
                         <div class="row mb-4">

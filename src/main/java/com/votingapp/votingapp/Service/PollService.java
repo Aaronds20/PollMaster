@@ -8,9 +8,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.votingapp.votingapp.Model.Category;
 import com.votingapp.votingapp.Model.Options;
 import com.votingapp.votingapp.Model.Poll;
 import com.votingapp.votingapp.Model.Vote;
+import com.votingapp.votingapp.Repository.CategoryRepository;
 import com.votingapp.votingapp.Repository.PollRepository;
 import com.votingapp.votingapp.Repository.VoteRepository;
 
@@ -21,6 +23,8 @@ public class PollService {
     private PollRepository pollRepository;
     @Autowired
     private VoteRepository voteRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     public void SavePoll(Poll poll) {
         for (Options option : poll.getOptions()) {
@@ -49,6 +53,10 @@ public class PollService {
             results.put(option.getText(), option.getVotes().size());
         }
         return results;
+    }
+
+    public List<Category> getAllCategories() { 
+        return categoryRepository.findAll(); 
     }
 
     // private int subtractPageByOne(int page){

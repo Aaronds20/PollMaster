@@ -55,7 +55,7 @@ public String getPoll(@PathVariable Long id, Model model, HttpSession httpSessio
         if (optionId == null) {
             Poll poll = pollService.getPollById(pollId);
             model.addAttribute("poll", poll);
-            model.addAttribute("errorMessage", "Please select an option before submitting.");
+            model.addAttribute("errorMessage", "*Please select an option before submitting.");
             return "votepage"; // Return to the voting page
         }
         User loggedInUser = (User) httpSession.getAttribute("loggedInUser");

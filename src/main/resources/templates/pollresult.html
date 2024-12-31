@@ -1,53 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="Description" content="Enter your description here" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-    />
-    <link rel="stylesheet" href="assets/css/style.css" />
-    <title>Votting App</title>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container">
-          <a class="navbar-brand" th:href="@{/admin/polllist}">VotingApp</a>
-          <ul class="navbar-nav" sec:authorize="isAuthenticated()">
-              <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Menu
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="#" th:href="@{/admin/admindetails}">My Profile</a>
-                      <a class="dropdown-item" href="#" th:href="@{/logout}">Sign Out</a>
-                  </div>
-              </li>
-          </ul>
-      </div>
-  </nav>
-    <div class="container-fluid">
-      <div class="text-center">
-        <h1 class="text-bg-dark">Poll Count Page</h1>
-        <h1 th:text="${poll.question}">Poll Question</h1> 
-        <h2>Results:</h2> 
-        <ul> 
-          <li th:each="entry : ${results.entrySet()}"> 
-          <span th:text="${entry.key}"></span>: <span th:text="${entry.value}"></span> votes 
-        </li>
-      </ul>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Poll Results</title>
+    <style>
+      .custom-text-size {
+          font-size: 1.5rem; /* Adjust the size as needed */
+      }
+  </style>
+</head>
+<body>
+    <div th:replace="fragments/navbar :: navbar"></div>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header bg-primary text-white text-center">
+                <h3>Poll Count Page</h3>
+            </div>
+            <div class="card-body">
+                <h4 class="text-center" th:text="${poll.question}">Poll Question</h4>
+                <h5 class="text-center">Results:</h5>
+                <ul class="list-group">
+                  <li class="list-group-item d-flex justify-content-between align-items-center" th:each="entry : ${results.entrySet()}">
+                    <span class="custom-text-size" th:text="${entry.key}"></span>
+                    <span class="badge badge-primary badge-pill custom-text-size" th:text="${entry.value}"></span>
+                </li>
+                </ul>
+            </div>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
-  </body>
+</body>
 </html>

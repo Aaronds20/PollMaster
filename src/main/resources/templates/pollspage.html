@@ -1,67 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="Description" content="Enter your description here" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-    />
-    <link rel="stylesheet" href="assets/css/style.css" />
-    <title>Votting App</title>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container">
-        <a class="navbar-brand" th:href="@{/user/pollspage}">VotingApp</a>
-        <ul class="navbar-nav" sec:authorize="isAuthenticated()">
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Menu
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#" th:href="@{/user/userdetails}"
-                >My Profile</a
-              >
-              <a class="dropdown-item" href="#" th:href="@{/logout}"
-                >Sign Out</a
-              >
-            </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Polls Page</title>
+</head>
+<body>
+    <div th:replace="fragments/navbar :: navbar"></div>
     <div class="container-fluid">
-      <div th:if="${successMessage}">
-        <div class="card-body text-center">
-            <div class="alert alert-success text-center" th:text="${successMessage}"></div>
+        <div th:if="${successMessage}">
+            <div class="card-body text-center">
+                <div class="alert alert-success text-center" th:text="${successMessage}"></div>
+            </div>
         </div>
-    </div>
-      <div class="row" th:each="poll : ${Polls}">
-        <div
-class="col-md-8 offset-md-2 btn text-capitalize text-center text-light">
-          <a
-            class="font-weight-bold text-xl-center text-primary"
-            th:href="@{'/user/getpoll/' + ${poll.id}}" th:text="${poll.id}"></a>
+        <div class="container-fluid">
+            <div class="row" style="height: 131px;margin-top: 75px;">
+                    <div class="col text-capitalize text-center font-weight-bold"  th:each="poll : ${Polls}" style="height: 250px;">
+                            <a class="btn btn-primary"
+                               style="height: 88px;width: 175px;margin-right: 30px;margin-left: 30px;border-radius: 15px;background: rgb(228, 197, 233);"
+                               th:href="@{'/user/getpoll/' + ${poll.id}}" th:text="${poll.id}">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
-  </body>
+</body>
 </html>

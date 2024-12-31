@@ -8,64 +8,50 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <title>Voting App</title>
+    <title>Add New Poll</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" th:href="@{/admin/polllist}">VotingApp</a>
-            <ul class="navbar-nav" sec:authorize="isAuthenticated()">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Menu
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#" th:href="@{/admin/admindetails}">My Profile</a>
-                        <a class="dropdown-item" href="#" th:href="@{/logout}">Sign Out</a>
+    <div th:replace="fragments/navbar :: navbar"></div>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="text-center">Add New Poll</h3>
                     </div>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
-            <div class="card">
-                <div class="card-header">
-                    <h1 class="text-center">Add New Poll</h1>
-                </div>
-                <div class="card-body">
-                    <form th:action="@{/admin/addpoll}" method="post" th:object="${PollData}"
-                          class="form-horizontal needs-validation" novalidate>
-                        <div class="form-group">
-                            <label for="question">Enter your Question</label>
-                            <input type="text" class="form-control" id="question" aria-describedby="questionHelp"
-                                   placeholder="Enter Question" name="question" th:value="${PollData.question}"
-                                   th:classappend="${#fields.hasErrors('question')?'is-invalid':''}" required>
-                            <div th:each="error : ${#fields.errors('question')}" class="invalid-feedback">
-                                <span th:text="${error}"></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="option">Please add your options</label>
-                            <div id="optionsContainer">
-                                <div class="option-input">
-                                    <label for="option0">Option 1:</label>
-                                    <input type="text" class="form-control" id="option0" name="options[0].text">
+                    <div class="card-body">
+                        <form th:action="@{/admin/addpoll}" method="post" th:object="${PollData}"
+                              class="form-horizontal needs-validation" novalidate>
+                            <div class="form-group">
+                                <label for="question">Enter your Question</label>
+                                <input type="text" class="form-control" id="question" aria-describedby="questionHelp"
+                                       placeholder="Enter Question" name="question" th:value="${PollData.question}"
+                                       th:classappend="${#fields.hasErrors('question')?'is-invalid':''}">
+                                <div th:each="error : ${#fields.errors('question')}" class="invalid-feedback">
+                                    <span th:text="${error}"></span>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-secondary mt-2" onclick="addOptionField()">Add Option</button>
-                        </div>
-                        <div th:if="${emptyoption}">
-                            <span class="text-danger" th:text="${emptyoption}"></span>
-                        </div>
-                        <div th:if="${lessoption}">
-                            <span class="text-danger" th:text="${lessoption}"></span>
-                        </div>
-                        <div class="form-group mt-3">
-                            <button type="submit" class="btn btn-primary">Create Poll</button>
-                        </div>
-                    </form>
+                            <div class="form-group">
+                                <label for="option">Please add your options</label>
+                                <div id="optionsContainer">
+                                    <div class="option-input mb-2">
+                                        <label for="option0">Option 1:</label>
+                                        <input type="text" class="form-control" id="option0" name="options[0].text">
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-secondary mt-2" onclick="addOptionField()">Add Option</button>
+                            </div>
+                            <div th:if="${emptyoption}">
+                                <span class="text-danger fs-5" th:text="${emptyoption}"></span>
+                            </div>
+                            <div th:if="${lessoption}">
+                                <span class="text-danger fs-5" th:text="${lessoption}"></span>
+                            </div>
+                            <div class="form-group mt-3">
+                                <button type="submit" class="btn btn-primary btn-block">Create Poll</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -77,7 +63,7 @@
     function addOptionField() {
         const container = document.getElementById('optionsContainer');
         const newDiv = document.createElement('div');
-        newDiv.className = 'option-input mt-2';
+        newDiv.className = 'option-input mb-2';
 
         newDiv.innerHTML = `
             <label for="option${optionCount}">Option ${optionCount + 1}:</label>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <title>Voting App</title>
+<head>
+</head>
+<body>
+    <div th:fragment="navbar">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" th:href="@{/admin/polllist}" sec:authorize="hasRole('ROLE_ADMIN')">VotingApp</a>
+                <a class="navbar-brand" th:href="@{/user/pollspage}" sec:authorize="hasRole('ROLE_USER')">VotingApp</a>
+                <ul class="navbar-nav" sec:authorize="isAuthenticated()">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Menu
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#" th:href="@{/admin/admindetails}" sec:authorize="hasRole('ROLE_ADMIN')">My Profile</a>
+                            <a class="dropdown-item" href="#" th:href="@{/user/userdetails}" sec:authorize="hasRole('ROLE_USER')">My Profile</a>   
+                            <a class="dropdown-item" href="#" th:href="@{/logout}">Sign Out</a>                     
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bs-init.js"></script>
+    <script src="assets/js/clean-blog.js"></script>
+</body>
+</html>

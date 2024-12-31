@@ -57,12 +57,12 @@ public class AdminController {
     Model model,RedirectAttributes redirectAttributes) {
         for (int i = 0; i < poll.getOptions().size(); i++) {
             if (poll.getOptions().get(i).getText().isEmpty()) {
-                model.addAttribute("emptyoption", "Option cannot be empty");
+                model.addAttribute("emptyoption", "*Option cannot be empty");
                 return "addnewpoll";
             }
         }
         if (poll.getOptions().size() < 2) {
-           model.addAttribute("lessoption", "Please provide at least two options.");
+           model.addAttribute("lessoption", "*Please provide at least two options.");
             return "addnewpoll";
         }
         if (!result.hasErrors()) {

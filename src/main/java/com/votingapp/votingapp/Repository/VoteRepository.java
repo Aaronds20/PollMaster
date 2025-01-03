@@ -13,7 +13,7 @@ import com.votingapp.votingapp.Model.Vote;
 
 @Repository
 public interface VoteRepository extends JpaRepository<Vote, Long> {
-   @Query("SELECT v FROM Vote v WHERE v.user.id = :userId AND v.option.poll.id = :pollId") 
-   Optional<Vote> findByUserAndPoll(@Param("userId") Long userId, @Param("pollId") Long pollId);
+   @Query("SELECT v FROM Vote v WHERE v.user.id = :userId AND v.option.poll.id = :pollId AND v.option.poll.category.id = :categoryId") 
+   Optional<Vote> findByUserAndPollAndCategory(@Param("userId") Long userId, @Param("pollId") Long pollId, @Param("categoryId") Long categoryId);
 }
 

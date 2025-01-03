@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.votingapp.votingapp.Model.Category;
 import com.votingapp.votingapp.Model.Poll;
 import com.votingapp.votingapp.Model.User;
+import com.votingapp.votingapp.Service.CategoryService;
 import com.votingapp.votingapp.Service.PollService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -28,19 +30,27 @@ public class AdminController {
 
     @Autowired
     private PollService PollService;
+    @Autowired
+    private CategoryService categoryService;
 
     @GetMapping("/polllist")
     public String GetPollList(Model model, HttpSession httpSession) {
         // User loggedInUser = (User) httpSession.getAttribute("loggedInUser");
-        List<Poll> pollsPage = PollService.findAllByPoll();
-        model.addAttribute("Polls", pollsPage);
+        List<Category> Categories = categoryService.getAllCategories();
+        model.addAttribute("Categories", Categories);
         return "polllist";
     }
 
-    @GetMapping("/polls/{pollId}/results")
-    public String viewPollResults(@PathVariable Long pollId, Model model) {
-        Poll poll = PollService.getPollById(pollId);
-        Map<String, Integer> results = PollService.getPollResults(pollId);
+    @GetMapping("/polls/{c_id}/results")
+    public String viewPollResults(@PathVariable Long c_id, Model model,RedirectAttributes redirectAttributes) {
+        Poll poll = categoryService.getPollByCategoryId(c_id);
+        if (poll == null) {
+            redirectAttributes.addFlashAttribute("error", "No poll found for this category");
+            return "redirect:/admin/polllist";   
+        }
+        Category category = categoryService.getCategoryById(c_id);
+        Map<String, Integer> results = PollService.getPollResults(poll.getId());
+        model.addAttribute("category", category);
         model.addAttribute("poll", poll);
         model.addAttribute("results", results);
         return "pollresult";
@@ -48,6 +58,8 @@ public class AdminController {
 
     @GetMapping("/newpoll")
     public String getAddPollForm(Model model, HttpSession httpSession) {
+        List<Category> allCategories = categoryService.getAllCategories();
+        model.addAttribute("Categories", allCategories);
         model.addAttribute("PollData", new Poll());
         return "addnewpoll";
     }
@@ -57,11 +69,15 @@ public class AdminController {
     Model model,RedirectAttributes redirectAttributes) {
         for (int i = 0; i < poll.getOptions().size(); i++) {
             if (poll.getOptions().get(i).getText().isEmpty()) {
+                List<Category> allCategories = categoryService.getAllCategories();
+                model.addAttribute("Categories", allCategories);
                 model.addAttribute("emptyoption", "*Option cannot be empty");
                 return "addnewpoll";
             }
         }
         if (poll.getOptions().size() < 2) {
+            List<Category> allCategories = categoryService.getAllCategories();
+        model.addAttribute("Categories", allCategories);
            model.addAttribute("lessoption", "*Please provide at least two options.");
             return "addnewpoll";
         }
@@ -70,6 +86,8 @@ public class AdminController {
             redirectAttributes.addFlashAttribute("success", "Poll has been added successfully");
             return "redirect:/admin/polllist";
         } else {
+            List<Category> allCategories = categoryService.getAllCategories();
+            model.addAttribute("Categories", allCategories);
             return "addnewpoll";
         }
     }

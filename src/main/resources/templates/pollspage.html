@@ -12,20 +12,21 @@
 </head>
 <body>
     <div th:replace="fragments/navbar :: navbar"></div>
-    <div class="container-fluid">
+    <div class="container mt-5">
         <div th:if="${successMessage}">
-            <div class="card-body text-center">
-                <div class="alert alert-success text-center" th:text="${successMessage}"></div>
-            </div>
+            <div class="alert alert-success text-center" th:text="${successMessage}"></div>
         </div>
-        <div class="container-fluid">
-            <div class="row" style="height: 131px;margin-top: 75px;">
-                    <div class="col text-capitalize text-center font-weight-bold"  th:each="poll : ${Polls}" style="height: 250px;">
-                            <a class="btn btn-primary"
-                               style="height: 88px;width: 175px;margin-right: 30px;margin-left: 30px;border-radius: 15px;background: rgb(228, 197, 233);"
-                               th:href="@{'/user/getpoll/' + ${poll.id}}" th:text="${poll.id}">
-                            </a>
-                        </div>
+        <div th:if="${error}">
+            <div class="alert alert-danger text-center" th:text="${error}"></div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="row" th:each="category : ${Categories}">
+                    <div class="col-md-4 mb-4">
+                        <a class="btn btn-primary btn-block text-capitalize font-weight-bold"
+                           style="height: 88px; border-radius: 15px; background: rgb(228, 197, 233);"
+                           th:href="@{'/user/getpoll/' + ${category.id}}" th:text="${category.c_name}">
+                        </a>
                     </div>
                 </div>
             </div>

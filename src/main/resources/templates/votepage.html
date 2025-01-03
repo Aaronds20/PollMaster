@@ -16,14 +16,18 @@
         <div th:if="${message}">
             <div class="alert alert-warning" th:text="${message}"></div>
         </div>
+        <div th:if="${error}">
+            <div class="alert alert-danger text-center" th:text="${error}"></div>
+        </div>
         <div th:if="${poll}">
             <div class="card">
                 <div class="card-header bg-primary text-white text-center">
-                    <h3>Poll Question</h3>
+                    <h3 th:text="${category.c_name}"></h3>
                 </div>
                 <div class="card-body">
                     <h4 class="text-center" th:text="${poll.question}"></h4>
                     <form id="myForm" th:action="@{/user/polls/{pollId}/vote(pollId=${poll.id})}" method="post">
+                        <input type="hidden" id="categoryId" name="categoryId" th:value="${category.id}" />
                         <ul class="list-group">
                             <li class="list-group-item" th:each="option : ${poll.options}">
                                 <div class="form-check">

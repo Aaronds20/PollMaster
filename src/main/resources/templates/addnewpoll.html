@@ -32,6 +32,13 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label for="category">Select Category</label>
+                                <select class="form-control" id="category" name="category.id" required>
+                                    <option th:each="category : ${Categories}" th:value="${category.id}"
+                                            th:text="${category.c_name}" ></option>
+                                </select>
+                                <br>
+                            <div class="form-group">
                                 <label for="option">Please add your options</label>
                                 <div id="optionsContainer">
                                     <div class="option-input mb-2">

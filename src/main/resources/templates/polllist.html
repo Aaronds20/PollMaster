@@ -14,28 +14,31 @@
 
 <body>
     <div th:replace="fragments/navbar :: navbar"></div>
-    <div class="container-fluid">
+    <div class="container mt-5">
         <div th:if="${success}">
-            <div class="card-body text-center">
-                <div class="alert alert-success text-center" th:text="${success}"></div>
-            </div>
+            <div class="alert alert-success text-center" th:text="${success}"></div>
         </div>
-        <div class="container-fluid">
-            <div class="row" style="height: 131px;margin-top: 75px;">
-                <div class="col" th:each="polls : ${Polls}" style="height: 250px;">
-                    <a class="btn btn-primary"
-                        style="height: 88px;width: 175px;margin-right: 30px;margin-left: 30px;border-radius: 15px;background: rgb(228, 197, 233);
-                        font-weight: 300; font-size: larger; text-align: center;"
-                        th:href="@{'/admin/polls/' + ${polls.id} + '/results'}" th:text="${polls.id}">
-                    </a>
+        <div th:if="${error}">
+            <div class="alert alert-danger text-center" th:text="${error}"></div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="row" th:each="category : ${Categories}">
+                    <div class="col-md-3 mb-4">
+                        <a class="btn btn-primary btn-block"
+                           style="height: 88px; border-radius: 15px; background: rgb(228, 197, 233); font-weight: 300; font-size: larger; text-align: center;"
+                           th:href="@{'/admin/polls/' + ${category.id} + '/results'}" th:text="${category.c_name}">
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-2 offset-md-5 mt-lg-5 btn btn-danger text-capitalize text-center font-weight-bolder border rounded-pill h-85 w-175">
-            <a href="#" th:href="@{/admin/newpoll}">Add new Poll</a>
+        <div class="text-center mt-5">
+            <a href="#" th:href="@{/admin/newpoll}" class="btn btn-danger btn-lg text-capitalize font-weight-bolder rounded-pill">
+                Add new Poll
+            </a>
         </div>
     </div>
-    <!-- <div th:replace="~{/fragments/pagination :: pagination(URLparameter='/admin/candidatelist')}"></div> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>

@@ -17,11 +17,13 @@ public class VoteService {
     @Autowired
     private OptionRepository optionRepository;
 
-    public void UpdateVote(Long optionId, User loggedInUser) {
+
+    public void UpdateVote(Long categoryId, Long optionId, User loggedInUser) {
         Options option = optionRepository.findById(optionId).orElseThrow(() -> new RuntimeException("Option not found"));
         Vote vote = new Vote();
         vote.setOption(option);
         vote.setUser(loggedInUser);
+        vote.setCategory(option.getPoll().getCategory());
         voteRepository.save(vote);
     }
 

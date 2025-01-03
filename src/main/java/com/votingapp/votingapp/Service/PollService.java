@@ -41,8 +41,8 @@ public class PollService {
         return pollRepository.findById(pollId).orElseThrow(() -> new RuntimeException("Poll not found"));
     }
 
-    public boolean hasUserVoted(Long pollId, Long userId) {
-        Optional<Vote> vote = voteRepository.findByUserAndPoll(userId, pollId);
+    public boolean hasUserVoted(Long pollId, Long userId, Long categoryId) {
+        Optional<Vote> vote = voteRepository.findByUserAndPollAndCategory(userId, pollId, categoryId);
         return vote.isPresent();
     }
 

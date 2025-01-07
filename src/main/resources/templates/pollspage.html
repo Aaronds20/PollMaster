@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <title>Polls Page</title>
+    <style>
+        .btn-custom {
+            height: 80px;
+            border-radius: 15px;
+            background: rgb(228, 197, 233);
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-custom i {
+            margin-right: 10px;
+        }
+    </style>
 </head>
+
 <body>
     <div th:replace="fragments/navbar :: navbar"></div>
     <div class="container mt-5">
@@ -20,12 +36,24 @@
             <div class="alert alert-danger text-center" th:text="${error}"></div>
         </div>
         <div class="row">
-            <div class="col-12">
-                <div class="row" th:each="category : ${Categories}">
-                    <div class="col-md-4 mb-4">
-                        <a class="btn btn-primary btn-block text-capitalize font-weight-bold"
-                           style="height: 88px; border-radius: 15px; background: rgb(228, 197, 233);"
-                           th:href="@{'/user/getpoll/' + ${category.id}}" th:text="${category.c_name}">
+            <div class="col-md-6">
+                <div class="row" th:each="category, iterStat : ${Categories}">
+                    <div th:if="${iterStat.index < 4}" class="col-12 mb-4">
+                        <a class="btn btn-primary btn-block text-capitalize font-weight-bold btn-custom"
+                            th:href="@{'/user/getpoll/' + ${category.id}}">
+                            <i class="fas fa-poll"></i>
+                            <span th:text="${category.c_name}"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row" th:each="category, iterStat : ${Categories}">
+                    <div th:if="${iterStat.index >= 4}" class="col-12 mb-4">
+                        <a class="btn btn-primary btn-block text-capitalize font-weight-bold btn-custom"
+                            th:href="@{'/user/getpoll/' + ${category.id}}">
+                            <i class="fas fa-poll"></i>
+                            <span th:text="${category.c_name}"></span>
                         </a>
                     </div>
                 </div>
@@ -36,4 +64,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
 </body>
+
 </html>

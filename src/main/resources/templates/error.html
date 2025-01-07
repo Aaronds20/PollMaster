@@ -9,11 +9,27 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <link rel="stylesheet" href="assets/css/style.css">
 <title>Voting App</title>
+<style>
+    .centered {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+    .centered .alert {
+        font-size: 3rem;
+        font-weight: bold;
+    }
+</style>
 </head>
 <body>
     <div class="container">
-        <div class="card-body text-center">
-            <div class="alert alert-danger text-center fs-1">404 - Page does not exist</div>
+        <div class="centered">
+            <div class="alert alert-danger">
+                <i class="fas fa-exclamation-triangle"></i> 404 - Page does not exist
+            </div>
+        </div>
     </div>    
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>

@@ -9,34 +9,55 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <title>Voting App</title>
+    <title>Polls Page</title>
+    <style>
+        .btn-custom {
+            height: 80px;
+            border-radius: 15px;
+            background: rgb(228, 197, 233);
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-custom i {
+            margin-right: 10px;
+        }
+    </style>
 </head>
 
 <body>
     <div th:replace="fragments/navbar :: navbar"></div>
     <div class="container mt-5">
-        <div th:if="${success}">
-            <div class="alert alert-success text-center" th:text="${success}"></div>
+        <div th:if="${successMessage}">
+            <div class="alert alert-success text-center" th:text="${successMessage}"></div>
         </div>
         <div th:if="${error}">
             <div class="alert alert-danger text-center" th:text="${error}"></div>
         </div>
         <div class="row">
-            <div class="col-12">
-                <div class="row" th:each="category : ${Categories}">
-                    <div class="col-md-3 mb-4">
-                        <a class="btn btn-primary btn-block"
-                           style="height: 88px; border-radius: 15px; background: rgb(228, 197, 233); font-weight: 300; font-size: larger; text-align: center;"
-                           th:href="@{'/admin/polls/' + ${category.id} + '/results'}" th:text="${category.c_name}">
+            <div class="col-md-6">
+                <div class="row" th:each="category, iterStat : ${Categories}">
+                    <div th:if="${iterStat.index < 4}" class="col-12 mb-4">
+                        <a class="btn btn-primary btn-block text-capitalize font-weight-bold btn-custom"
+                        th:href="@{'/admin/polls/' + ${category.id} + '/results'}">
+                            <i class="fas fa-poll"></i>
+                            <span th:text="${category.c_name}"></span>
                         </a>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="text-center mt-5">
-            <a href="#" th:href="@{/admin/newpoll}" class="btn btn-danger btn-lg text-capitalize font-weight-bolder rounded-pill">
-                Add new Poll
-            </a>
+            <div class="col-md-6">
+                <div class="row" th:each="category, iterStat : ${Categories}">
+                    <div th:if="${iterStat.index >= 4}" class="col-12 mb-4">
+                        <a class="btn btn-primary btn-block text-capitalize font-weight-bold btn-custom"
+                        th:href="@{'/admin/polls/' + ${category.id} + '/results'}">
+                            <i class="fas fa-poll"></i>
+                            <span th:text="${category.c_name}"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>

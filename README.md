@@ -40,7 +40,7 @@ PollMaster is a simple application that allows users to create and participate i
 
 ### Configure Database
 
-1. Create a MySQL database named votingapp.
+1. Create a MySQL database named pollingdb.
 
 2. Update the database configuration in application.properties:
    ```sh

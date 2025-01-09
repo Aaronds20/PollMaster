@@ -5,9 +5,9 @@ PollMaster is a simple application that allows users to create and participate i
 ## Features
 
 - User authentication and authorization
-- Create new polls with multiple options
+- Create new polls with multiple options with different categories
 - Vote on polls
-- Admin panel to view poll results
+- Admin panel to view poll results of different categories
 
 ## Technologies Used
 

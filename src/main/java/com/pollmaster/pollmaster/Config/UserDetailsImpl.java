@@ -1,4 +1,4 @@
-package com.votingapp.votingapp.Config;
+package com.pollmaster.pollmaster.Config;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -7,7 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.votingapp.votingapp.Model.User;
+import com.pollmaster.pollmaster.Model.User;
 
 public class UserDetailsImpl implements UserDetails{
     

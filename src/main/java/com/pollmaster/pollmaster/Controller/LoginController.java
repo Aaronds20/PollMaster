@@ -1,4 +1,4 @@
-package com.votingapp.votingapp.Controller;
+package com.pollmaster.pollmaster.Controller;
 
 
 import org.springframework.stereotype.Controller;

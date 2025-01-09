@@ -1,4 +1,4 @@
-package com.votingapp.votingapp.Model;
+package com.pollmaster.pollmaster.Model;
 
 
 import jakarta.persistence.Column;

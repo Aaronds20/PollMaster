@@ -1,4 +1,4 @@
-package com.votingapp.votingapp.Service;
+package com.pollmaster.pollmaster.Service;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,13 +8,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.votingapp.votingapp.Model.Category;
-import com.votingapp.votingapp.Model.Options;
-import com.votingapp.votingapp.Model.Poll;
-import com.votingapp.votingapp.Model.Vote;
-import com.votingapp.votingapp.Repository.CategoryRepository;
-import com.votingapp.votingapp.Repository.PollRepository;
-import com.votingapp.votingapp.Repository.VoteRepository;
+import com.pollmaster.pollmaster.Model.Category;
+import com.pollmaster.pollmaster.Model.Options;
+import com.pollmaster.pollmaster.Model.Poll;
+import com.pollmaster.pollmaster.Model.Vote;
+import com.pollmaster.pollmaster.Repository.CategoryRepository;
+import com.pollmaster.pollmaster.Repository.PollRepository;
+import com.pollmaster.pollmaster.Repository.VoteRepository;
 
 @Service
 public class PollService {

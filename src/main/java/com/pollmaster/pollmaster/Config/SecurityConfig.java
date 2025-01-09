@@ -1,4 +1,4 @@
-package com.votingapp.votingapp.Config;
+package com.pollmaster.pollmaster.Config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

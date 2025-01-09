@@ -1,12 +1,12 @@
-package com.votingapp.votingapp.Repository;
+package com.pollmaster.pollmaster.Repository;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.votingapp.votingapp.Model.Category;
-import com.votingapp.votingapp.Model.Poll;
+import com.pollmaster.pollmaster.Model.Category;
+import com.pollmaster.pollmaster.Model.Poll;
 
 public interface CategoryRepository extends JpaRepository<Category, Long>{
 

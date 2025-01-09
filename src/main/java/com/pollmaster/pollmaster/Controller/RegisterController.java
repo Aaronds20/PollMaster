@@ -1,4 +1,4 @@
-package com.votingapp.votingapp.Controller;
+package com.pollmaster.pollmaster.Controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.votingapp.votingapp.Model.User;
-import com.votingapp.votingapp.Service.UserService;
+import com.pollmaster.pollmaster.Model.User;
+import com.pollmaster.pollmaster.Service.UserService;
 
 import jakarta.validation.Valid;
 

@@ -1,4 +1,4 @@
-package com.votingapp.votingapp.Controller;
+package com.pollmaster.pollmaster.Controller;
 
 import java.util.List;
 
@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.votingapp.votingapp.Model.Poll;
-import com.votingapp.votingapp.Model.User;
-import com.votingapp.votingapp.Model.Category;
-import com.votingapp.votingapp.Service.CategoryService;
-import com.votingapp.votingapp.Service.PollService;
-import com.votingapp.votingapp.Service.VoteService;
+import com.pollmaster.pollmaster.Model.Category;
+import com.pollmaster.pollmaster.Model.Poll;
+import com.pollmaster.pollmaster.Model.User;
+import com.pollmaster.pollmaster.Service.CategoryService;
+import com.pollmaster.pollmaster.Service.PollService;
+import com.pollmaster.pollmaster.Service.VoteService;
+
 import jakarta.servlet.http.HttpSession;
 
 @Controller

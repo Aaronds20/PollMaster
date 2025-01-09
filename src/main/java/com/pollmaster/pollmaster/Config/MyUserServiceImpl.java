@@ -1,12 +1,12 @@
-package com.votingapp.votingapp.Config;
+package com.pollmaster.pollmaster.Config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.votingapp.votingapp.Model.User;
-import com.votingapp.votingapp.Repository.UserRepository;
+import com.pollmaster.pollmaster.Model.User;
+import com.pollmaster.pollmaster.Repository.UserRepository;
 
 public class MyUserServiceImpl implements UserDetailsService{
 

@@ -1,4 +1,4 @@
-package com.votingapp.votingapp.Model;
+package com.pollmaster.pollmaster.Model;
 
 import java.util.ArrayList;
 import java.util.List;

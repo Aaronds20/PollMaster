@@ -1,13 +1,13 @@
-package com.votingapp.votingapp.Service;
+package com.pollmaster.pollmaster.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.votingapp.votingapp.Model.Options;
-import com.votingapp.votingapp.Model.User;
-import com.votingapp.votingapp.Model.Vote;
-import com.votingapp.votingapp.Repository.OptionRepository;
-import com.votingapp.votingapp.Repository.VoteRepository;
+import com.pollmaster.pollmaster.Model.Options;
+import com.pollmaster.pollmaster.Model.User;
+import com.pollmaster.pollmaster.Model.Vote;
+import com.pollmaster.pollmaster.Repository.OptionRepository;
+import com.pollmaster.pollmaster.Repository.VoteRepository;
 
 @Service
 public class VoteService {

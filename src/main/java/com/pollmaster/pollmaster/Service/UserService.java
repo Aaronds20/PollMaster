@@ -1,4 +1,4 @@
-package com.votingapp.votingapp.Service;
+package com.pollmaster.pollmaster.Service;
 
 import java.util.Optional;
 
@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.votingapp.votingapp.Model.User;
-import com.votingapp.votingapp.Repository.UserRepository;
+import com.pollmaster.pollmaster.Model.User;
+import com.pollmaster.pollmaster.Repository.UserRepository;
 
 @Service
 public class UserService {

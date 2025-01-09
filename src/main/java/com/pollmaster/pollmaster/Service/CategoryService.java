@@ -1,13 +1,13 @@
-package com.votingapp.votingapp.Service;
+package com.pollmaster.pollmaster.Service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.votingapp.votingapp.Model.Category;
-import com.votingapp.votingapp.Model.Poll;
-import com.votingapp.votingapp.Repository.CategoryRepository;
+import com.pollmaster.pollmaster.Model.Category;
+import com.pollmaster.pollmaster.Model.Poll;
+import com.pollmaster.pollmaster.Repository.CategoryRepository;
 
 @Service
 public class CategoryService {

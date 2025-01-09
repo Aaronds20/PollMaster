@@ -1,4 +1,4 @@
-package com.votingapp.votingapp.Config;
+package com.pollmaster.pollmaster.Config;
 
 import java.io.IOException;
 
@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-import com.votingapp.votingapp.Model.User;
-import com.votingapp.votingapp.Repository.UserRepository;
+import com.pollmaster.pollmaster.Model.User;
+import com.pollmaster.pollmaster.Repository.UserRepository;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

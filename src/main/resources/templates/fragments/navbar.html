@@ -5,24 +5,24 @@
 </head>
 <body>
     <div th:fragment="navbar">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-info">
             <div class="container">
-                <a class="navbar-brand" th:href="@{/admin/polllist}" sec:authorize="hasRole('ROLE_ADMIN')" style="font-size: 1.5em;">PollMaster</a>
-                <a class="navbar-brand" th:href="@{/user/pollspage}" sec:authorize="hasRole('ROLE_USER')" style="font-size: 1.5em;">PollMaster</a>
+                <a class="navbar-brand font-weight-bold" th:href="@{/admin/polllist}" sec:authorize="hasRole('ROLE_ADMIN')" style="font-size: 1.5em;">PollMaster</a>
+                <a class="navbar-brand font-weight-bold" th:href="@{/user/pollspage}" sec:authorize="hasRole('ROLE_USER')" style="font-size: 1.5em;">PollMaster</a>
                 <ul class="navbar-nav" sec:authorize="isAuthenticated()">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        <a class="nav-link dropdown-toggle font-weight-bold" href="#" id="navbarDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 1.5em;">
-                            <i class="fas fa-bars"></i> Menu
+                            Menu
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#" th:href="@{/admin/admindetails}" sec:authorize="hasRole('ROLE_ADMIN')" style="font-size: 1.2em;">
+                        <div class="dropdown-menu font-weight-bold" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item font-weight-bold" href="#" th:href="@{/admin/admindetails}" sec:authorize="hasRole('ROLE_ADMIN')" style="font-size: 1.2em;">
                                 <i class="fas fa-user"></i> My Profile
                             </a>
-                            <a class="dropdown-item" href="#" th:href="@{/user/userdetails}" sec:authorize="hasRole('ROLE_USER')" style="font-size: 1.2em;">
+                            <a class="dropdown-item font-weight-bold" href="#" th:href="@{/user/userdetails}" sec:authorize="hasRole('ROLE_USER')" style="font-size: 1.2em;">
                                 <i class="fas fa-user"></i> My Profile
                             </a>   
-                            <a class="dropdown-item" href="#" th:href="@{/logout}" style="font-size: 1.2em;">
+                            <a class="dropdown-item font-weight-bold" href="#" th:href="@{/logout}" style="font-size: 1.2em;">
                                 <i class="fas fa-sign-out-alt"></i> Sign Out
                             </a>                     
                         </div>

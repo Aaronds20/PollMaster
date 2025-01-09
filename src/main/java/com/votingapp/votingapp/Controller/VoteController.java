@@ -63,8 +63,10 @@ public String getPoll(@PathVariable Long c_id, Model model, HttpSession httpSess
     public String UpdateVote(@PathVariable Long pollId, @RequestParam(required = false) Long optionId, @RequestParam(required = false) Long categoryId, 
     Model model,HttpSession httpSession,RedirectAttributes redirectAttributes) {
         if (optionId == null) {
+            Category category = categoryService.getCategoryById(categoryId);
             Poll poll = pollService.getPollById(pollId);
             model.addAttribute("poll", poll);
+            model.addAttribute("category", category);
             model.addAttribute("errorMessage", "*Please select an option before submitting.");
             return "votepage"; // Return to the voting page
         }

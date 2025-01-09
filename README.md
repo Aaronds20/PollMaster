@@ -31,20 +31,20 @@ PollMaster is a simple application that allows users to create and participate i
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/yourusername/VotingApp.git
+    git clone https://github.com/yourusername/PollMaster.git
     ```
 2. Navigate to the project directory:
     ```sh
-    cd VotingApp
+    cd PollMaster
     ```
 
 ### Configure Database
 
-1. Create a MySQL database named pollingdb.
+1. Create a MySQL database named pollmasterdb.
 
 2. Update the database configuration in application.properties:
    ```sh
-    spring.datasource.url=jdbc:mysql://localhost:3306/pollingdb
+    spring.datasource.url=jdbc:mysql://localhost:3306/pollmasterdb
     spring.datasource.username=your_username
     spring.datasource.password=your_password
     spring.jpa.hibernate.ddl-auto=update

@@ -43,12 +43,14 @@ PollMaster is a simple application that allows users to create and participate i
 1. Create a MySQL database named votingapp.
 
 2. Update the database configuration in application.properties:
+   ```sh
     spring.datasource.url=jdbc:mysql://localhost:3306/pollingdb
     spring.datasource.username=your_username
     spring.datasource.password=your_password
     spring.jpa.hibernate.ddl-auto=update
     spring.jpa.show-sql=true
     spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
+    ```
 
 ### Running the application
 
@@ -90,8 +92,11 @@ We welcome contributions! Please follow these steps:
 - For any questions or feedback, please contact us at aarondsouza04020@gmail.com.
 
 ## Images
-<img alt="PollsPage" src="C:\Users\Aaron Dsouza\Downloads\pollspage.png">
+![pollspage](https://github.com/user-attachments/assets/75b4f366-a151-4dc0-bb9c-bf3257efc2dd)
 
-<img alt="PollsPage" src="C:\Users\Aaron Dsouza\Downloads\votepage.jpeg">
+![votepage](https://github.com/user-attachments/assets/e491838e-1d6d-4d0b-b8f9-8d4abc870b4b)
 
-<img alt="PollsPage" src="C:\Users\Aaron Dsouza\Downloads\resultspage.png">
+![resultspage](https://github.com/user-attachments/assets/3551ff6e-7de1-423d-a841-14acca4b8f59)
+
+
+
